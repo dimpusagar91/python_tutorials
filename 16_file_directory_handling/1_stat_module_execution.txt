@@ -1,0 +1,1 @@
+path>python 1_stat_module.py tempDir

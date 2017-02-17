@@ -1,0 +1,2 @@
+C:\trainings\ppts\23_performance_tuning>c:\Python33\python.exe -m cProfile 4_Pro
+filing_demo.py

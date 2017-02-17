@@ -1,0 +1,5 @@
+To Create a Client
+=====================
+Create a socket with socket call.
+
+Connect (the socket) to the server using connect call.

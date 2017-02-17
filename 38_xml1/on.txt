@@ -1,0 +1,41 @@
+#!/bin/bash
+
+##Delete the existing configs
+cd ~/SCM
+/bin/rm SCM_config.txt
+/bin/rm variance.scm
+/bin/rm Variance*xlsx
+
+# SCM_TOOL="~/SCM/CksumGenerationTool_LIN.exe"
+SCM_OUTPUT_DIR="~/SCM"
+# SCM_LOG_FILE="/tmp/scm-variance.log"
+
+## Get the core config from site
+wget '<http link>'
+
+# SCM_config.txt - all the component config parameters
+## Generate local variance config
+if [ -s SCM_config.txt ] ; then
+   cat SCM_config.txt |awk -F":" '{print $2}' >variance.scm # i want to grep for the specific component and copy only that content. how to get that??
+else
+   echo "SCM config is not generated. Please check" | /bin/mail -s "SCM CONFIG NOT GENERATED" veera.venna@sc.com
+   exit 0
+fi
+
+## Generate Variance.xlsx file
+if [-s variance.scm ] ; then
+   ./CksumGenerationTool_LIN.exe varian.scm
+else
+   echo "Variance config is not generated. Please check" | /bin/mail -s "Monthly Variance Report Not Generated" veera.venna@sc.com
+   exit 1
+fi
+
+cd ~/SCM
+OUTPUT_FILE='ls -ltr Variance.xlsx |tail -1 | awk '{print $9}'
+
+##Mail monthly Variance Report to recepients
+if [ -s $OUTPUT_FILE ] ; then
+   uuencode $OUTPUT_FILE $OUTPUT_FILE | /bin/mail -s "Monthly Variance Report" veera.venna@sc.com
+else
+   echo "Monthly Variance Report is not generated. Please check" | /bin/mail -s"Monthly Variance report NOT GENERATED" veera.venna@sc.com
+fi

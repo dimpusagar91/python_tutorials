@@ -1,0 +1,16 @@
+To Create a Server
+=====================
+Create a socket using socket call.
+
+Bind the socket to a port address using bind call.
+
+Listen to the socket at the port address using listen call.
+
+Accept client connections using accept call.
+
+To Create a Client
+=====================
+
+Create a socket with socket call.
+
+Connect (the socket) to the server using connect call.

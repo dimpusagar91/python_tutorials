@@ -1,0 +1,257 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang16393{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\*\generator Riched20 6.2.9200}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang9 A regular expression is a special sequence of characters that helps you match or find other strings or sets of strings, using a specialized syntax held in a pattern. Regular expressions are widely used in UNIX world.\par
+\par
+The module re provides full support for Perl-like regular expressions in Python. The re module raises the exception re.error if an error occurs while compiling or using a regular expression.\par
+\par
+We would cover two important functions, which would be used to handle regular expressions. But a small thing first: There are various characters, which would have special meaning when they are used in regular expression. To avoid any confusion while dealing with regular expressions, we would use Raw Strings as r'expression'.\par
+\par
+The match Function\par
+This function attempts to match RE pattern to string with optional flags.\par
+\par
+Here is the syntax for this function:\par
+\par
+re.match(pattern, string, flags=0)\par
+Here is the description of the parameters:\par
+\par
+Parameter\tab Description\par
+pattern\tab This is the regular expression to be matched.\par
+string\tab This is the string, which would be searched to match the pattern at the beginning of string.\par
+flags\tab You can specify different flags using bitwise OR (|). These are modifiers, which are listed in the table below.\par
+The re.match function returns a match object on success, None on failure. We would use group(num) or groups() function of match object to get matched expression.\par
+\par
+Match Object Methods\tab Description\par
+group(num=0)\tab This method returns entire match (or specific subgroup num)\par
+groups()\tab This method returns all matching subgroups in a tuple (empty if there weren't any)\par
+EXAMPLE:\par
+#!/usr/bin/python\par
+import re\par
+\par
+line = "Cats are smarter than dogs"\par
+\par
+matchObj = re.match( r'(.*) are (.*?) .*', line, re.M|re.I)\par
+\par
+if matchObj:\par
+   print "matchObj.group() : ", matchObj.group()\par
+   print "matchObj.group(1) : ", matchObj.group(1)\par
+   print "matchObj.group(2) : ", matchObj.group(2)\par
+else:\par
+   print "No match!!"\par
+When the above code is executed, it produces following result:\par
+\par
+matchObj.group() :  Cats are smarter than dogs\par
+matchObj.group(1) :  Cats\par
+matchObj.group(2) :  smarter\par
+The search Function\par
+This function searches for first occurrence of RE pattern within string with optional flags.\par
+\par
+Here is the syntax for this function:\par
+\par
+re.search(pattern, string, flags=0)\par
+Here is the description of the parameters:\par
+\par
+Parameter\tab Description\par
+pattern\tab This is the regular expression to be matched.\par
+string\tab This is the string, which would be searched to match the pattern anywhere in the string.\par
+flags\tab You can specify different flags using bitwise OR (|). These are modifiers, which are listed in the table below.\par
+The re.search function returns a match object on success, None on failure. We would use group(num) or groups() function of match object to get matched expression.\par
+\par
+Match Object Methods\tab Description\par
+group(num=0)\tab This method returns entire match (or specific subgroup num)\par
+groups()\tab This method returns all matching subgroups in a tuple (empty if there weren't any)\par
+EXAMPLE:\par
+#!/usr/bin/python\par
+import re\par
+\par
+line = "Cats are smarter than dogs";\par
+\par
+searchObj = re.search( r'(.*) are (.*?) .*', line, re.M|re.I)\par
+\par
+if searchObj:\par
+   print "searchObj.group() : ", searchObj.group()\par
+   print "searchObj.group(1) : ", searchObj.group(1)\par
+   print "searchObj.group(2) : ", searchObj.group(2)\par
+else:\par
+   print "Nothing found!!"\par
+When the above code is executed, it produces following result:\par
+\par
+matchObj.group() :  Cats are smarter than dogs\par
+matchObj.group(1) :  Cats\par
+matchObj.group(2) :  smarter\par
+Matching vs Searching:\par
+Python offers two different primitive operations based on regular expressions: match checks for a match only at the beginning of the string, while search checks for a match anywhere in the string (this is what Perl does by default).\par
+\par
+EXAMPLE:\par
+#!/usr/bin/python\par
+import re\par
+\par
+line = "Cats are smarter than dogs";\par
+\par
+matchObj = re.match( r'dogs', line, re.M|re.I)\par
+if matchObj:\par
+   print "match --> matchObj.group() : ", matchObj.group()\par
+else:\par
+   print "No match!!"\par
+\par
+searchObj = re.search( r'dogs', line, re.M|re.I)\par
+if searchObj:\par
+   print "search --> searchObj.group() : ", searchObj.group()\par
+else:\par
+   print "Nothing found!!"\par
+When the above code is executed, it produces the following result:\par
+\par
+No match!!\par
+search --> matchObj.group() :  dogs\par
+Search and Replace:\par
+Some of the most important re methods that use regular expressions is sub.\par
+\par
+SYNTAX:\par
+re.sub(pattern, repl, string, max=0)\par
+This method replaces all occurrences of the RE pattern in string with repl, substituting all occurrences unless max provided. This method would return modified string.\par
+\par
+EXAMPLE:\par
+Following is the example:\par
+\par
+#!/usr/bin/python\par
+import re\par
+\par
+phone = "2004-959-559 # This is Phone Number"\par
+\par
+# Delete Python-style comments\par
+num = re.sub(r'#.*$', "", phone)\par
+print "Phone Num : ", num\par
+\par
+# Remove anything other than digits\par
+num = re.sub(r'\\D', "", phone)    \par
+print "Phone Num : ", num\par
+When the above code is executed, it produces the following result:\par
+\par
+Phone Num :  2004-959-559\par
+Phone Num :  2004959559\par
+Regular-expression Modifiers - Option Flags\par
+Regular expression literals may include an optional modifier to control various aspects of matching. The modifiers are specified as an optional flag. You can provide multiple modifiers using exclusive OR (|), as shown previously and may be represented by one of these:\par
+\par
+Modifier\tab Description\par
+re.I\tab Performs case-insensitive matching.\par
+re.L\tab Interprets words according to the current locale. This interpretation affects the alphabetic group (\\w and \\W), as well as word boundary behavior (\\b and \\B).\par
+re.M\tab Makes $ match the end of a line (not just the end of the string) and makes ^ match the start of any line (not just the start of the string).\par
+re.S\tab Makes a period (dot) match any character, including a newline.\par
+re.U\tab Interprets letters according to the Unicode character set. This flag affects the behavior of \\w, \\W, \\b, \\B.\par
+re.X\tab Permits "cuter" regular expression syntax. It ignores whitespace (except inside a set [] or when escaped by a backslash) and treats unescaped # as a comment marker.\par
+Regular-expression patterns:\par
+Except for control characters, (+ ? . * ^ $ ( ) [ ] \{ \} | \\), all characters match themselves. You can escape a control character by preceding it with a backslash.\par
+\par
+Following table lists the regular expression syntax that is available in Python:\par
+\par
+Pattern\tab Description\par
+^\tab Matches beginning of line.\par
+$\tab Matches end of line.\par
+.\tab Matches any single character except newline. Using m option allows it to match newline as well.\par
+[...]\tab Matches any single character in brackets.\par
+[^...]\tab Matches any single character not in brackets\par
+re*\tab Matches 0 or more occurrences of preceding expression.\par
+re+\tab Matches 1 or more occurrence of preceding expression.\par
+re?\tab Matches 0 or 1 occurrence of preceding expression.\par
+re\{ n\}\tab Matches exactly n number of occurrences of preceding expression.\par
+re\{ n,\}\tab Matches n or more occurrences of preceding expression.\par
+re\{ n, m\}\tab Matches at least n and at most m occurrences of preceding expression.\par
+a| b\tab Matches either a or b.\par
+(re)\tab Groups regular expressions and remembers matched text.\par
+(?imx)\tab Temporarily toggles on i, m, or x options within a regular expression. If in parentheses, only that area is affected.\par
+(?-imx)\tab Temporarily toggles off i, m, or x options within a regular expression. If in parentheses, only that area is affected.\par
+(?: re)\tab Groups regular expressions without remembering matched text.\par
+(?imx: re)\tab Temporarily toggles on i, m, or x options within parentheses.\par
+(?-imx: re)\tab Temporarily toggles off i, m, or x options within parentheses.\par
+(?#...)\tab Comment.\par
+(?= re)\tab Specifies position using a pattern. Doesn't have a range.\par
+(?! re)\tab Specifies position using pattern negation. Doesn't have a range.\par
+(?> re)\tab Matches independent pattern without backtracking.\par
+\\w\tab Matches word characters.\par
+\\W\tab Matches nonword characters.\par
+\\s\tab Matches whitespace. Equivalent to [\\t\\n\\r\\f].\par
+\\S\tab Matches nonwhitespace.\par
+\\d\tab Matches digits. Equivalent to [0-9].\par
+\\D\tab Matches nondigits.\par
+\\A\tab Matches beginning of string.\par
+\\Z\tab Matches end of string. If a newline exists, it matches just before newline.\par
+\\z\tab Matches end of string.\par
+\\G\tab Matches point where last match finished.\par
+\\b\tab Matches word boundaries when outside brackets. Matches backspace (0x08) when inside brackets.\par
+\\B\tab Matches nonword boundaries.\par
+\\n, \\t, etc.\tab Matches newlines, carriage returns, tabs, etc.\par
+\\1...\\9\tab Matches nth grouped subexpression.\par
+\\10\tab Matches nth grouped subexpression if it matched already. Otherwise refers to the octal representation of a character code.\par
+Regular-expression Examples\par
+Literal characters:\par
+Example\tab Description\par
+python\tab Match "python".\par
+Character classes:\par
+Example\tab Description\par
+[Pp]ython\tab Match "Python" or "python"\par
+rub[ye]\tab Match "ruby" or "rube"\par
+[aeiou]\tab Match any one lowercase vowel\par
+[0-9]\tab Match any digit; same as [0123456789]\par
+[a-z]\tab Match any lowercase ASCII letter\par
+[A-Z]\tab Match any uppercase ASCII letter\par
+[a-zA-Z0-9]\tab Match any of the above\par
+[^aeiou]\tab Match anything other than a lowercase vowel\par
+[^0-9]\tab Match anything other than a digit\par
+Special Character Classes:\par
+Example\tab Description\par
+.\tab Match any character except newline\par
+\\d\tab Match a digit: [0-9]\par
+\\D\tab Match a nondigit: [^0-9]\par
+\\s\tab Match a whitespace character: [ \\t\\r\\n\\f]\par
+\\S\tab Match nonwhitespace: [^ \\t\\r\\n\\f]\par
+\\w\tab Match a single word character: [A-Za-z0-9_]\par
+\\W\tab Match a nonword character: [^A-Za-z0-9_]\par
+Repetition Cases:\par
+Example\tab Description\par
+ruby?\tab Match "rub" or "ruby": the y is optional\par
+ruby*\tab Match "rub" plus 0 or more ys\par
+ruby+\tab Match "rub" plus 1 or more ys\par
+\\d\{3\}\tab Match exactly 3 digits\par
+\\d\{3,\}\tab Match 3 or more digits\par
+\\d\{3,5\}\tab Match 3, 4, or 5 digits\par
+Nongreedy repetition:\par
+This matches the smallest number of repetitions:\par
+\par
+Example\tab Description\par
+<.*>\tab Greedy repetition: matches "<python>perl>"\par
+<.*?>\tab Nongreedy: matches "<python>" in "<python>perl>"\par
+Grouping with parentheses:\par
+Example\tab Description\par
+\\D\\d+\tab No group: + repeats \\d\par
+(\\D\\d)+\tab Grouped: + repeats \\D\\d pair\par
+([Pp]ython(, )?)+\tab Match "Python", "Python, python, python", etc.\par
+Backreferences:\par
+This matches a previously matched group again:\par
+\par
+Example\tab Description\par
+([Pp])ython&\\1ails\tab Match python&pails or Python&Pails\par
+(['"])[^\\1]*\\1\tab Single or double-quoted string. \\1 matches whatever the 1st group matched . \\2 matches whatever the 2nd group matched, etc.\par
+Alternatives:\par
+Example\tab Description\par
+python|perl\tab Match "python" or "perl"\par
+rub(y|le))\tab Match "ruby" or "ruble"\par
+Python(!+|\\?)\tab "Python" followed by one or more ! or one ?\par
+Anchors:\par
+This needs to specify match position.\par
+\par
+Example\tab Description\par
+^Python\tab Match "Python" at the start of a string or internal line\par
+Python$\tab Match "Python" at the end of a string or line\par
+\\APython\tab Match "Python" at the start of a string\par
+Python\\Z\tab Match "Python" at the end of a string\par
+\\bPython\\b\tab Match "Python" at a word boundary\par
+\\brub\\B\tab\\B is nonword boundary: match "rub" in "rube" and "ruby" but not alone\par
+Python(?=!)\tab Match "Python", if followed by an exclamation point\par
+Python(?!!)\tab Match "Python", if not followed by an exclamation point\par
+Special syntax with parentheses:\par
+Example\tab Description\par
+R(?#comment)\tab Matches "R". All the rest is a comment\par
+R(?i)uby\tab Case-insensitive while matching "uby"\par
+R(?i:uby)\tab Same as above\par
+rub(?:y|le))\tab Group only without creating \\1 backreference\par
+}
+ 

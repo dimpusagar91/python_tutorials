@@ -1,0 +1,8 @@
+python
+perl
+ruby
+unix
+unix shell
+lua
+smalltalk
+I love perl programming

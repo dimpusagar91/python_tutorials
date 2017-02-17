@@ -1,0 +1,4 @@
+python
+perl
+I love unix
+Python is the best scripting langauge of all langauges
