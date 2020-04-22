@@ -1,0 +1,37 @@
+city,country,included,alert_yoy,abs_yoy_alert_threshold
+Boston,United States of America,TRUE,TRUE,0.2
+Chicago,United States of America,TRUE,TRUE,0.2
+Houston,United States of America,TRUE,TRUE,0.2
+Jacksonville,United States of America,TRUE,TRUE,0.2
+Los Angeles,United States of America,TRUE,TRUE,0.2
+Nashville,United States of America,TRUE,TRUE,0.2
+New Orleans,United States of America,TRUE,TRUE,0.2
+New York,United States of America,TRUE,TRUE,0.2
+Portland,United States of America,TRUE,TRUE,0.2
+San Antonio,United States of America,TRUE,TRUE,0.2
+San Francisco,United States of America,TRUE,TRUE,0.2
+Seattle,United States of America,TRUE,TRUE,0.2
+Wuhan,China,TRUE,TRUE,0.2
+Beijing,China,TRUE,TRUE,0.2
+Shanghai,China,TRUE,TRUE,0.2
+Guangzhou,China,TRUE,TRUE,0.2
+Shenzhen,China,TRUE,TRUE,0.2
+Dongguan,China,TRUE,TRUE,0.2
+Zhuhai,China,TRUE,TRUE,0.2
+Suzhou,China,TRUE,TRUE,0.2
+Wuxi,China,TRUE,TRUE,0.2
+Nanjing,China,TRUE,TRUE,0.2
+Ningbo,China,TRUE,TRUE,0.2
+Hangzhou,China,TRUE,TRUE,0.2
+Tokyo,Japan,TRUE,TRUE,0.2
+Osaka,Japan,TRUE,TRUE,0.2
+Nagoya,Japan,TRUE,TRUE,0.2
+Sapporo,Japan,TRUE,TRUE,0.2
+Bangkok,Thailand,TRUE,TRUE,0.2
+Jakarta,Indonesia,TRUE,TRUE,0.2
+Kuala Lumpur,Malaysia,TRUE,TRUE,0.2
+Taipei,Taiwan,TRUE,TRUE,0.2
+Manila,Philippines,TRUE,TRUE,0.2
+Jeddah,Saudi Arabia,TRUE,TRUE,0.2
+Riyadh,Saudi Arabia,TRUE,TRUE,0.2
+Dubai,United Arab Emirates,TRUE,TRUE,0.2
